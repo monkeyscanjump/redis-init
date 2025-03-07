@@ -16,6 +16,44 @@ async function buildSchema() {
   console.log(chalk.blue('--------------------'));
   console.log(chalk.yellow('This tool will help you create Redis schema files interactively.\n'));
 
+  // First prompt for output directory
+  const { outputDir } = await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'outputDir',
+      message: 'Enter directory to save schema files:',
+      default: './schemas',
+      validate: input => {
+        // Check if directory exists or can be created
+        try {
+          if (!fs.existsSync(input)) {
+            console.log(chalk.yellow(`\nDirectory ${input} doesn't exist. It will be created.`));
+            // Don't actually create it yet, just check if we can
+            const testPath = path.resolve(input);
+            const parentDir = path.dirname(testPath);
+            if (!fs.existsSync(parentDir)) {
+              return `Parent directory ${parentDir} doesn't exist. Please create it first.`;
+            }
+          }
+          return true;
+        } catch (error) {
+          return `Invalid directory: ${error.message}`;
+        }
+      }
+    }
+  ]);
+
+  // Create output directory if it doesn't exist
+  if (!fs.existsSync(outputDir)) {
+    try {
+      fs.mkdirSync(outputDir, { recursive: true });
+      console.log(chalk.green(`Created directory: ${outputDir}`));
+    } catch (error) {
+      console.error(chalk.red(`Failed to create directory ${outputDir}: ${error.message}`));
+      return;
+    }
+  }
+
   const { schemaName } = await inquirer.prompt([
     {
       type: 'input',
@@ -440,10 +478,11 @@ async function buildSchema() {
 
   // Write schema to file
   const filename = `${schemaName}.redis`;
+  const fullPath = path.join(outputDir, filename);
 
   try {
-    fs.writeFileSync(path.join(process.cwd(), filename), schemaContent);
-    console.log(chalk.green(`\nSchema created successfully: ${filename}`));
+    fs.writeFileSync(fullPath, schemaContent);
+    console.log(chalk.green(`\nSchema created successfully: ${fullPath}`));
     console.log(`\nSchema contains ${schemaContent.split('\n').length} lines.`);
   } catch (error) {
     console.error(chalk.red(`\nFailed to create schema: ${error.message}`));
