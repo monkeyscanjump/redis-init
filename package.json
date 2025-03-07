@@ -1,0 +1,56 @@
+{
+  "name": "redis-init",
+  "version": "1.0.0",
+  "description": "Advanced Redis database initialization module for schema loading and management",
+  "main": "lib/index.js",
+  "bin": {
+    "redis-init": "./bin/redis-init.js",
+    "redis-schema-builder": "./bin/redis-schema-builder.js"
+  },
+  "scripts": {
+    "start": "node bin/redis-init.js",
+    "build-schema": "node bin/redis-schema-builder.js",
+    "test": "jest",
+    "test:unit": "jest --testPathIgnorePatterns=integration.test.js",
+    "test:integration": "REDIS_INTEGRATION_TESTS=1 jest --testPathPattern=integration.test.js",
+    "test:coverage": "jest --coverage"
+  },
+  "keywords": [
+    "redis",
+    "schema",
+    "initialization",
+    "database",
+    "cli",
+    "transactions",
+    "migration",
+    "lua",
+    "template",
+    "backup",
+    "monitoring"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^9.4.0",
+    "fs-extra": "^10.1.0",
+    "glob": "^11.0.1",
+    "inquirer": "^8.2.4",
+    "redis": "^4.3.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "mock-fs": "^5.1.4"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/monkeyscanjump/redis-init.git"
+  },
+  "bugs": {
+    "url": "https://github.com/monkeyscanjump/redis-init/issues"
+  },
+  "homepage": "https://github.com/monkeyscanjump/redis-init#readme"
+}

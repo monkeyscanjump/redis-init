@@ -1,0 +1,85 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+build/
+out/
+lib-cov/
+
+# Coverage reports
+coverage/
+.nyc_output/
+*.lcov
+
+# Test files
+*.test.js.snap
+
+# Redis database files
+*.rdb
+*.aof
+dump.rdb
+appendonly.aof
+
+# Redis backup files
+*.redis-backup
+*.redis.bak
+backup.json
+
+# Log files
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Generated documentation
+docs/
+api-docs/
+schema-docs.json
+
+# Generated schemas
+/test-schemas/
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+*.tmp
+
+# Debug files
+debug/
+.debug/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Project specific
+redis-schema-*.json
+redis-backup-*.json
+.redis-cli-history
